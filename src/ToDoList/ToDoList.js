@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './ToDoList.css';
 
-function App() {
+export default function ToDoList() {
   const [todos, setTodos] = useState([
     {
       content: 'Pickup dry cleaning',
@@ -16,8 +16,8 @@ function App() {
       content: 'Build a todo app in React',
       isCompleted: false,
     }
-  ]);
-
+  ])
+  
   function handleKeyDown(e, i) {
     if (e.key === 'Enter') {
       createTodoAtIndex(e, i);
@@ -59,7 +59,6 @@ function App() {
     temporaryTodos[index].isCompleted = !temporaryTodos[index].isCompleted;
     setTodos(temporaryTodos);
   }
-
   return (
     <div className="app">
       <div className="header">
@@ -87,5 +86,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
