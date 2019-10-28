@@ -1,34 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Container } from '@material-ui/core';
+import Card from "@material-ui/core/Card";
 import ToDoList from './ToDoList/ToDoList.js'
+import SimpleTabs from './navigation'
 import './App.css'
 
 export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/ToDoList">ToDoList</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <Route exact path="/" component={Home} />
-          <Route path="/topics" component={Topics} />
-          <Route path="/ToDoList" component={ToDoList} />
-        </div>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+        <Container>
+          <SimpleTabs />
+          <Card
+            style={{ padding: 24, backgroundColor: "#112233", height: 600, marginTop: 12 }}
+          >
+            <Route path="/topics" component={Topics} />
+            <Route path="/ToDoList" component={ToDoList} />
+          </Card>
+        </Container>
       </Router>
-    )
+    );
   }
 }
 
