@@ -36,7 +36,7 @@ export default function ToDoList() {
     });
     setTodos(newTodos);
     setTimeout(() => {
-      document.forms[0].elements[i + 1].focus();
+      document.forms && document.forms[0].elements[i + 1].focus();
     }, 0);
   }
 
@@ -50,7 +50,7 @@ export default function ToDoList() {
     if (i === 0 && todos.length === 1) return;
     setTodos(todos => todos.slice(0, i).concat(todos.slice(i + 1, todos.length)));
     setTimeout(() => {
-      document.forms[0].elements[i - 1].focus();
+      document.forms && document.forms[0].elements[i - 1] && document.forms[0].elements[i - 1].focus();
     }, 0);
   }
 
