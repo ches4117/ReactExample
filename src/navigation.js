@@ -9,22 +9,20 @@ import Button from "@material-ui/core/Button";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
-  };
-}
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  }
+    backgroundColor: '#adc6ff',
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
-export default function SimpleTabs() {
+export default function Navigation() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -37,32 +35,35 @@ export default function SimpleTabs() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root} >
         <Toolbar>
+          <Link to="/">
+          <IconButton className={classes.menuButton} color="#FFF" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          </Link>
+
           <Button
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}
           >
-            Open Menu
+            easy  
           </Button>
           <Menu
-            id="simple-menu"
+            id="easy-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
             <MenuItem>
-              <Link to="/">Home </Link>
-            </MenuItem>
-            <MenuItem>
               <Link to="/ToDoList">ToDoList </Link>
             </MenuItem>
           </Menu>
+          <div style={{ flexGrow: 1 }}/>
+          <Button color="black" style={{ alignItems: 'right'}}>Login</Button>
         </Toolbar>
       </AppBar>
-    </div>
   );
 }
