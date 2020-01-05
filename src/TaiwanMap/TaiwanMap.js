@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
-import './ToDoList.less'
+import './ToDoList.css'
 
 export default function ToDoList() {
     const [todos, setTodos] = useState([
@@ -17,7 +17,7 @@ export default function ToDoList() {
             isCompleted: false,
         }
     ])
-
+  
     function handleKeyDown(e, i) {
         if (e.key === 'Enter') {
             createTodoAtIndex(e, i)
@@ -78,7 +78,6 @@ export default function ToDoList() {
                                 value={todo.content}
                                 onKeyDown={e => handleKeyDown(e, i)}
                                 onChange={e => updateTodoAtIndex(e, i)}
-                                style={{   color: 'black' }}
                             />
                         </div>
                     ))}
