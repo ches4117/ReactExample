@@ -11,6 +11,21 @@ export default function ToDoList() {
         {
             content: 'Get haircut',
             isCompleted: false,
+        },        {
+            content: 'Get haircut',
+            isCompleted: false,
+        },        {
+            content: 'Get haircut',
+            isCompleted: false,
+        },        {
+            content: 'Get haircut',
+            isCompleted: false,
+        },        {
+            content: 'Get haircut',
+            isCompleted: false,
+        },        {
+            content: 'Get haircut',
+            isCompleted: false,
         },
         {
             content: 'Build a todo app in React',
@@ -18,6 +33,16 @@ export default function ToDoList() {
         }
     ])
 
+    const [pages, setPages] = useState([
+        {
+            num: 1
+        },
+        {
+            num: 2
+        }
+    ])
+    const [nowPage, setNowPage] = useState(1)
+    const pageLimit = 5
     function handleKeyDown(e, i) {
         if (e.key === 'Enter') {
             createTodoAtIndex(e, i)
@@ -59,6 +84,8 @@ export default function ToDoList() {
         temporaryTodos[index].isCompleted = !temporaryTodos[index].isCompleted
         setTodos(temporaryTodos)
     }
+
+    console.log(nowPage)
     return (
         <div className="app">
             <div className="header">
@@ -66,24 +93,49 @@ export default function ToDoList() {
             </div>
             <form className="todo-list">
                 <ul>
-                    {todos.map((todo, i) => (
-                        <div className={`todo ${todo.isCompleted && 'todo-is-completed'}`}>
-                            <div className={'checkbox'} onClick={() => toggleTodoCompleteAtIndex(i)}>
-                                {todo.isCompleted && (
-                                    <span>&#x2714;</span>
-                                )}
+                    {todos
+                        .filter((item, index) => {
+                            return index < nowPage * 5 && index > (nowPage - 1) * 5
+                        }).map((todo, i) => (
+                            <div className={`todo ${todo.isCompleted && 'todo-is-completed'}`}>
+                                <div className={'checkbox'} onClick={() => toggleTodoCompleteAtIndex(i)}>
+                                    {todo.isCompleted && (
+                                        <span>&#x2714;</span>
+                                    )}
+                                </div>
+                                <input
+                                    type="text"
+                                    value={todo.content}
+                                    onKeyDown={e => handleKeyDown(e, i)}
+                                    onChange={e => updateTodoAtIndex(e, i)}
+                                    style={{ color: 'black' }}
+                                />
                             </div>
-                            <input
-                                type="text"
-                                value={todo.content}
-                                onKeyDown={e => handleKeyDown(e, i)}
-                                onChange={e => updateTodoAtIndex(e, i)}
-                                style={{   color: 'black' }}
-                            />
-                        </div>
-                    ))}
+                        ))}
                 </ul>
+
+                <div className="pagination">
+                    <a href="#">&laquo;</a>
+                    {
+                        pages.map((page) => {
+                            return (
+                                <a
+                                    href="#"
+                                    className={page.num === nowPage ? 'active' : null}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        setNowPage(page.num)
+                                    }}
+                                >
+                                    {page.num}
+                                </a>
+                            )
+                        })
+                    }
+                    <a href="#">&raquo;</a>
+                </div>
             </form>
+
         </div>
     )
 }
